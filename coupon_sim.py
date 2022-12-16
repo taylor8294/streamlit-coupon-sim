@@ -35,7 +35,7 @@ pl = st.empty()
 results = []
 fig, ax = plt.subplots()
 sns.histplot(np.asarray(results),ax=ax)
-pl.pyplot(fig)
+pl.write(fig)
 
 while True:
     if state == 'Running':
@@ -43,12 +43,14 @@ while True:
         result = simulate_coupon_collectors(n_coupons, n_packs)
         results.append(result)
         ax.clear()
-        ax.hist(np.asarray(results))
+        sns.histplot(np.asarray(results),ax=ax)
+        pl.write(fig)
     elif state == 'Reset':
         # Reset the histogram data and display an empty histogram
         results = []
         ax.clear()
         sns.histplot(np.asarray(results),ax=ax)
+        pl.write(fig)
         # Change state back to Pause
         k += 1
         state = button_row.radio(
