@@ -34,34 +34,33 @@ state = button_row.radio(
 # Create a histogram to display the results of the simulations
 pl = st.empty()
 results = []
-while True:
-    with pl.container():
-        if state == 'Running':
+with pl.container():
+    if state == 'Running':
+        for i in range(100):
             # Run the simulation and update the histogram
             result = simulate_coupon_collectors(n_coupons, n_packs)
             results.append(result)
-            fig, ax = plt.subplots()
-            sns.histplot(np.asarray(results), ax=ax)
-            try:
-                st.pyplot(fig) # st.write(fig)
-            except Exception as e:
-                st.exception(e)
-        elif state == 'Reset':
-            # Change state back to Pause
-            k += 1
-            state = button_row.radio(
-                "State",
-                ('Pause', 'Run', 'Reset'),
-                0,
-                horizontal=True,
-                key=k
-            )
-            # Reset the histogram data and display an empty histogram
-            results = []
-            fig, ax = plt.subplots()
-            sns.histplot(np.asarray(results),ax=ax)
-            try:
-                st.pyplot(fig) # st.write(fig)
-            except Exception as e:
-                st.exception(e)
-    time.sleep(1)
+        fig, ax = plt.subplots()
+        sns.histplot(np.asarray(results), ax=ax)
+        try:
+            st.pyplot(fig) # st.write(fig)
+        except Exception as e:
+            st.exception(e)
+    elif state == 'Reset':
+        # Change state back to Pause
+        k += 1
+        state = button_row.radio(
+            "State",
+            ('Pause', 'Run', 'Reset'),
+            0,
+            horizontal=True,
+            key=k
+        )
+        # Reset the histogram data and display an empty histogram
+        results = []
+        fig, ax = plt.subplots()
+        sns.histplot(np.asarray(results),ax=ax)
+        try:
+            st.pyplot(fig) # st.write(fig)
+        except Exception as e:
+            st.exception(e)
