@@ -29,11 +29,21 @@ def simulate_coupon_collectors(n_coupons, n_pack):
         coupons.update(np.random.choice(n_coupons, size=n_pack, replace=False))
     return packs
 
+col1, col2 = st.columns([1,1])
+
+with col1:
+    btn_run = st.button('Run')
+
+with col2:
+    if st.button('Reset'):
+        # Reset the histogram data
+        st.session_state.results = []
+
 pl = st.empty()
 with pl.container():
     fig, ax = plt.subplots()
-
-    if st.button('Run'):
+    
+    if btn_run:
         # Run the simulation 100 times
         bar = st.progress(0)
         for i in range(100):
@@ -41,10 +51,6 @@ with pl.container():
             result = simulate_coupon_collectors(in_coupons, in_pack)
             st.session_state.results.append(result)
         bar.progress(100)
-    
-    if st.button('Reset'):
-        # Reset the histogram data
-        st.session_state.results = []
     
     # Write total and draw the histogram
     st.write('Total: {} runs'.format(len(st.session_state.results)))
