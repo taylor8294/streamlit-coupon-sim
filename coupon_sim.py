@@ -16,7 +16,7 @@ if 'params' not in st.session_state:
 # Get input from the user
 in_coupons = st.sidebar.number_input("Number of coupons", min_value=1, max_value=1000, value=670)
 in_pack = st.sidebar.number_input("Number of coupons per pack", min_value=1, max_value=in_coupons, value=5)
-if '{}-{}'.format(in_coupons,in_pack) !== st.session_state.params:
+if '{}-{}'.format(in_coupons,in_pack) != st.session_state.params:
     st.session_state.results = []
     st.session_state.params = '{}-{}'.format(in_coupons,in_pack)
 
