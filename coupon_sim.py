@@ -34,16 +34,21 @@ state = button_row.radio(
 # Create a histogram to display the results of the simulations
 pl = st.empty()
 results = []
+ax = sns.histplot(np.asarray(results))
+try:
+    st.pyplot(ax.get_figure()) # st.write(ax.get_figure())
+except Exception as e:
+    st.exception(e)
+
 with pl.container():
     if state == 'Running':
         for i in range(100):
             # Run the simulation and update the histogram
             result = simulate_coupon_collectors(n_coupons, n_packs)
             results.append(result)
-        fig, ax = plt.subplots()
-        sns.histplot(np.asarray(results), ax=ax)
+        ax = sns.histplot(np.asarray(results))
         try:
-            st.pyplot(fig) # st.write(fig)
+            st.pyplot(ax.get_figure()) # st.write(ax.get_figure())
         except Exception as e:
             st.exception(e)
     elif state == 'Reset':
@@ -58,9 +63,8 @@ with pl.container():
         )
         # Reset the histogram data and display an empty histogram
         results = []
-        fig, ax = plt.subplots()
-        sns.histplot(np.asarray(results),ax=ax)
+        ax = sns.histplot(np.asarray(results))
         try:
-            st.pyplot(fig) # st.write(fig)
+            st.pyplot(ax.get_figure()) # st.write(ax.get_figure())
         except Exception as e:
             st.exception(e)
