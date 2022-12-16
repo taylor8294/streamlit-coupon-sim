@@ -19,14 +19,14 @@ def simulate_coupon_collectors(n_coupons, n_pack):
     return packs
 
 button_row = st.empty()
-k = -1
+k = 0
 
 state = button_row.radio(
     "State",
     ('Pause', 'Run', 'Reset'),
     0,
     horizontal=True,
-    key=k++
+    key=k
 )
 
 # Create a histogram to display the results of the simulations
@@ -49,10 +49,11 @@ while True:
         ax.clear()
         ax.hist(np.asarray(results))
         # Change state back to Pause
+        k += 1
         state = button_row.radio(
             "State",
             ('Pause', 'Run', 'Reset'),
             0,
             horizontal=True,
-            key=k++
+            key=k
         )
