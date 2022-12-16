@@ -46,8 +46,8 @@ with pl.container():
     elif state == 'Reset':
         # Reset the histogram data
         st.session_state.results = []
-        st.experimental_rerun()
     # Draw the histogram
+    st.write('Total: {} runs'.format(len(st.session_state.results)))
     sns.histplot(np.asarray(st.session_state.results), ax=ax)
     try:
         st.pyplot(fig) # st.write(fig)
