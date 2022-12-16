@@ -10,10 +10,15 @@ st.title("Coupon Collectors Problem Simulator")
 # Initialise session state
 if 'results' not in st.session_state:
     st.session_state.results = []
+if 'params' not in st.session_state:
+    st.session_state.params = '670-5'
 
 # Get input from the user
 in_coupons = st.sidebar.number_input("Number of coupons", min_value=1, max_value=1000, value=670)
 in_pack = st.sidebar.number_input("Number of coupons per pack", min_value=1, max_value=in_coupons, value=5)
+if '{}-{}'.format(in_coupons,in_pack) !== st.session_state.params:
+    st.session_state.results = []
+    st.session_state.params = '{}-{}'.format(in_coupons,in_pack)
 
 # Function to simulate coupon collectors problem
 def simulate_coupon_collectors(n_coupons, n_pack):
