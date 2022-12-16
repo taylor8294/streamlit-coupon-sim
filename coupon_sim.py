@@ -34,13 +34,14 @@ state = button_row.radio(
 # Create a histogram to display the results of the simulations
 pl = st.empty()
 results = []
+fig, ax = plt.subplots()
 with pl.container():
     if state == 'Run':
         for i in range(100):
             # Run the simulation and update the histogram
             result = simulate_coupon_collectors(n_coupons, n_packs)
             results.append(result)
-        fig, ax = plt.subplots()
+        ax.clear()
         sns.histplot(np.asarray(results), ax=ax)
         try:
             st.pyplot(fig) # st.write(fig)
@@ -58,7 +59,7 @@ with pl.container():
         )
         # Reset the histogram data and display an empty histogram
         results = []
-        fig, ax = plt.subplots()
+        ax.clear()
         sns.histplot(np.asarray(results),ax=ax)
         try:
             st.pyplot(fig) # st.write(fig)
