@@ -41,7 +41,7 @@ with pl.container():
     if state == 'Run':
         for i in range(100):
             # Run the simulation
-            result = simulate_coupon_collectors(n_coupons, n_packs)
+            result = simulate_coupon_collectors(in_coupons, in_pack)
             st.session_state.results.append(result)
     elif state == 'Reset':
         # Reset the histogram data
