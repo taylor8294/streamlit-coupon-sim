@@ -19,12 +19,14 @@ def simulate_coupon_collectors(n_coupons, n_pack):
     return packs
 
 button_row = st.empty()
+k = -1
 
 state = button_row.radio(
     "State",
     ('Pause', 'Run', 'Reset'),
     0,
-    horizontal=True
+    horizontal=True,
+    key=k++
 )
 
 # Create a histogram to display the results of the simulations
@@ -39,19 +41,18 @@ while True:
         # Run the simulation and update the histogram
         result = simulate_coupon_collectors(n_coupons, n_packs)
         results.append(result)
-        fig, ax = plt.subplots()
+        ax.clear()
         ax.hist(np.asarray(results))
-        pl.pyplot(fig)
     elif state == 'Reset':
         # Reset the histogram data and display an empty histogram
         results = []
-        fig, ax = plt.subplots()
+        ax.clear()
         ax.hist(np.asarray(results))
-        pl.pyplot(fig)
         # Change state back to Pause
         state = button_row.radio(
             "State",
             ('Pause', 'Run', 'Reset'),
             0,
-            horizontal=True
+            horizontal=True,
+            key=k++
         )
