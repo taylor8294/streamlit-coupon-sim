@@ -7,9 +7,13 @@ import time
 # Set up the Streamlit app
 st.title("Coupon Collectors Problem Simulator")
 
+# Initialise session state
+if 'results' not in st.session_state:
+    st.session_state.results = []
+
 # Get input from the user
-n_coupons = st.sidebar.number_input("Number of coupons", min_value=1, max_value=1000, value=670)
-n_packs = st.sidebar.number_input("Number of coupons per pack", min_value=1, max_value=n_coupons, value=5)
+in_coupons = st.sidebar.number_input("Number of coupons", min_value=1, max_value=1000, value=670)
+in_pack = st.sidebar.number_input("Number of coupons per pack", min_value=1, max_value=in_coupons, value=5)
 
 # Function to simulate coupon collectors problem
 def simulate_coupon_collectors(n_coupons, n_pack):
@@ -22,7 +26,6 @@ def simulate_coupon_collectors(n_coupons, n_pack):
 
 button_row = st.empty()
 k = 0
-
 state = button_row.radio(
     "State",
     ('Pause', 'Run', 'Reset'),
@@ -31,30 +34,21 @@ state = button_row.radio(
     key=k
 )
 
-# Create a histogram to display the results of the simulations
-pl = st.empty()
-results = []
 fig, ax = plt.subplots()
+
+pl = st.empty()
 with pl.container():
     if state == 'Run':
         for i in range(100):
-            # Run the simulation and update the histogram
+            # Run the simulation
             result = simulate_coupon_collectors(n_coupons, n_packs)
-            results.append(result)
+            st.session_state.results.append(result)
     elif state == 'Reset':
-        # Reset the histogram data and display an empty histogram
-        results = []
-        # Change state back to Pause
-        k += 1
-        state = button_row.radio(
-            "State",
-            ('Pause', 'Run', 'Reset'),
-            0,
-            horizontal=True,
-            key=k
-        )
-    ax.clear()
-    sns.histplot(np.asarray(results), ax=ax)
+        # Reset the histogram data
+        st.session_state.results = []
+        st.experimental_rerun()
+    # Draw the histogram
+    sns.histplot(np.asarray(st.session_state.results), ax=ax)
     try:
         st.pyplot(fig) # st.write(fig)
     except Exception as e:
