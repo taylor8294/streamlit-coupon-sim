@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Set up the Streamlit app
 st.title("Coupon Collectors Problem Simulator")
@@ -33,7 +34,7 @@ state = button_row.radio(
 pl = st.empty()
 results = []
 fig, ax = plt.subplots()
-ax.hist(np.asarray(results))
+sns.histplot(np.asarray(results),ax=ax)
 pl.pyplot(fig)
 
 while True:
@@ -47,7 +48,7 @@ while True:
         # Reset the histogram data and display an empty histogram
         results = []
         ax.clear()
-        ax.hist(np.asarray(results))
+        sns.histplot(np.asarray(results),ax=ax)
         # Change state back to Pause
         k += 1
         state = button_row.radio(
