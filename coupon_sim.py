@@ -34,5 +34,6 @@ if st.button('Reset'):
     num_packs = 0
 
 # Show histogram
-plt.hist(num_packs)
-st.pyplot()
+fig, ax = plt.subplots()
+ax.hist(num_packs)
+st.pyplot(fig)
