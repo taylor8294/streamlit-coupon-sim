@@ -23,7 +23,7 @@ button_row = st.empty()
 state = button_row.radio(
     "State",
     ('Pause', 'Run', 'Reset'),
-    0
+    0,
     horizontal=True
 )
 
@@ -52,6 +52,6 @@ while True:
         state = button_row.radio(
             "State",
             ('Pause', 'Run', 'Reset'),
-            0
+            0,
             horizontal=True
         )
