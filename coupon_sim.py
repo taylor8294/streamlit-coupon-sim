@@ -41,10 +41,12 @@ with pl.container():
             result = simulate_coupon_collectors(in_coupons, in_pack)
             st.session_state.results.append(result)
         bar.progress(100)
-    elif st.button('Reset'):
+    
+    if st.button('Reset'):
         # Reset the histogram data
         st.session_state.results = []
-    # Draw the histogram
+    
+    # Write total and draw the histogram
     st.write('Total: {} runs'.format(len(st.session_state.results)))
     sns.histplot(np.asarray(st.session_state.results), ax=ax)
     try:
