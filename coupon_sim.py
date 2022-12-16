@@ -33,16 +33,19 @@ state = button_row.radio(
     horizontal=True,
     key=k
 )
+bar = st.progress(0)
 
 fig, ax = plt.subplots()
 
 pl = st.empty()
 with pl.container():
     if state == 'Run':
-        for i in range(1000):
+        for i in range(100):
             # Run the simulation
+            bar.progress(i)
             result = simulate_coupon_collectors(in_coupons, in_pack)
             st.session_state.results.append(result)
+        bar.progress(100)
     elif state == 'Reset':
         # Reset the histogram data
         st.session_state.results = []
