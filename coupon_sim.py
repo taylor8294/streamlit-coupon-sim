@@ -43,7 +43,7 @@ pl = st.empty()
 with pl.container():
     fig, ax = plt.subplots()
     
-    if btn_run:
+    if btn_run or len(st.session_state.results)==0:
         # Run the simulation 100 times
         bar = st.progress(0)
         for i in range(100):
