@@ -41,7 +41,7 @@ except Exception as e:
     st.exception(e)
 
 with pl.container():
-    if state == 'Running':
+    if state == 'Run':
         for i in range(100):
             # Run the simulation and update the histogram
             result = simulate_coupon_collectors(n_coupons, n_packs)
