@@ -39,7 +39,7 @@ fig, ax = plt.subplots()
 pl = st.empty()
 with pl.container():
     if state == 'Run':
-        for i in range(100):
+        for i in range(1000):
             # Run the simulation
             result = simulate_coupon_collectors(in_coupons, in_pack)
             st.session_state.results.append(result)
